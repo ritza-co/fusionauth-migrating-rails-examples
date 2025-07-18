@@ -1,0 +1,109 @@
+{
+  "includeArchived": false,
+  "users": [
+    {
+      "id": "571e838b-3d7b-4451-b07a-ba8461fe8486",
+      "email": "admin@example.com",
+      "fullName": "Admin User",
+      "username": "admin@example.com",
+      "active": true,
+      "verified": true,
+      "insertInstant": 1752816704824,
+      "lastUpdateInstant": 1752816704824,
+      "data": {
+        "rails_auth": {
+          "original_id": 1,
+          "sign_in_count": 15,
+          "current_sign_in_at": "2025-07-17T05:31:44Z",
+          "last_sign_in_at": "2025-07-15T05:31:44Z",
+          "current_sign_in_ip": "192.168.1.100",
+          "last_sign_in_ip": "192.168.1.99",
+          "confirmed_at": "2025-07-11T05:31:44Z",
+          "reset_password_token": null,
+          "reset_password_sent_at": null
+        }
+      },
+      "password": "$2a$12$pjEhtN5AhKy5tvZ9SQ4lK.nX00KA9XfrdjgeHZD2CjjnNw3HqFGa6",
+      "encryptionScheme": "bcrypt",
+      "factor": 12
+    },
+    {
+      "id": "48259238-b04c-42ea-9c78-6fa686d47cbe",
+      "email": "user@example.com",
+      "fullName": "Regular User",
+      "username": "user@example.com",
+      "active": true,
+      "verified": true,
+      "insertInstant": 1752816705077,
+      "lastUpdateInstant": 1752816705077,
+      "data": {
+        "rails_auth": {
+          "original_id": 2,
+          "sign_in_count": 8,
+          "current_sign_in_at": "2025-07-18T03:31:45Z",
+          "last_sign_in_at": "2025-07-17T05:31:45Z",
+          "current_sign_in_ip": "192.168.1.101",
+          "last_sign_in_ip": "192.168.1.100",
+          "confirmed_at": "2025-07-15T05:31:45Z",
+          "reset_password_token": null,
+          "reset_password_sent_at": null
+        }
+      },
+      "password": "$2a$12$9E6posOY0UDTipnfxANlzurfAGQOtbR2CUMMQB8LBo2njOuHRFlQm",
+      "encryptionScheme": "bcrypt",
+      "factor": 12
+    },
+    {
+      "id": "3883a549-074c-4a8b-a619-8ff85eafb81f",
+      "email": "test@example.com",
+      "fullName": "Test User",
+      "username": "test@example.com",
+      "active": true,
+      "verified": true,
+      "insertInstant": 1752816705343,
+      "lastUpdateInstant": 1752816705343,
+      "data": {
+        "rails_auth": {
+          "original_id": 3,
+          "sign_in_count": 3,
+          "current_sign_in_at": "2025-07-18T01:31:45Z",
+          "last_sign_in_at": "2025-07-16T05:31:45Z",
+          "current_sign_in_ip": "192.168.1.102",
+          "last_sign_in_ip": "192.168.1.101",
+          "confirmed_at": "2025-07-17T05:31:45Z",
+          "reset_password_token": null,
+          "reset_password_sent_at": null
+        }
+      },
+      "password": "$2a$12$gBiYAmgvJf437n32VDWDqOca1D40c/PkC4m6lZ.mPSDe7y8hWoPBe",
+      "encryptionScheme": "bcrypt",
+      "factor": 12
+    },
+    {
+      "id": "1b4cbf57-37b2-447a-8392-44a187f25a9a",
+      "email": "unconfirmed@example.com",
+      "fullName": "Unconfirmed User",
+      "username": "unconfirmed@example.com",
+      "active": false,
+      "verified": false,
+      "insertInstant": 1752816705591,
+      "lastUpdateInstant": 1752816705591,
+      "data": {
+        "rails_auth": {
+          "original_id": 4,
+          "sign_in_count": 0,
+          "current_sign_in_at": null,
+          "last_sign_in_at": null,
+          "current_sign_in_ip": null,
+          "last_sign_in_ip": null,
+          "confirmed_at": null,
+          "reset_password_token": null,
+          "reset_password_sent_at": null
+        }
+      },
+      "password": "$2a$12$6BZz6EoRzJI2FtkFxkqzyuvQGd3ZPLDG.gHde3WXNDJWJJ51Dxtli",
+      "encryptionScheme": "bcrypt",
+      "factor": 12
+    }
+  ]
+}
