@@ -9,6 +9,7 @@ This repository contains three Rails applications demonstrating different authen
 - Node.js v22.13.0
 - npm 10.9.2
 - SQLite3
+- Docker
 
 ## Setup
 
@@ -17,6 +18,14 @@ Install npm dependencies to run the project commands:
 ```bash
 npm install
 ```
+
+To import a user, you need to start the FusionAuth application. Use the following command:
+
+```bash
+docker compose up -d --build
+```
+
+Once the application is running, you can access the FusionAuth instance at: <http://localhost:9011>
 
 ## Devise Project
 
