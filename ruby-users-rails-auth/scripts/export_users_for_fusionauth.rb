@@ -13,19 +13,36 @@ puts "Found #{User.count} users to export"
 users_data = User.all.map do |user|
   puts "Exporting user: #{user.email}"
   
-  # Extract bcrypt cost factor for FusionAuth
-  bcrypt_cost = nil
-  if user.password_digest&.start_with?('$2a$')
-    bcrypt_cost = user.password_digest.split('$')[2].to_i
+  # Parse bcrypt hash according to FusionAuth requirements:
+  # Example: $2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy
+  # Should be split to:
+  # factor: 10
+  # salt: N9qo8uLOickgx2ZMRZoMye (first 22 chars after factor)
+  # password: IjZAgcfl7p92ldGxad68LJZdL17lhWy (remaining chars)
+  
+  bcrypt_factor = 10  # default
+  bcrypt_salt = ""
+  bcrypt_password = ""
+  
+  if user.password_digest&.match(/^\$2[aby]\$(\d+)\$(.+)$/)
+    bcrypt_factor = $1.to_i
+    salt_and_hash = $2
+    
+    # According to the user, salt is first 22 characters
+    bcrypt_salt = salt_and_hash[0, 22]
+    # Password is the remaining characters
+    bcrypt_password = salt_and_hash[22..-1]
   end
   
   user_data = {
     email: user.email,
     username: user.email,
     fullName: user.name,
-    password: user.password_digest,
+    password: bcrypt_password,
     encryptionScheme: "bcrypt",
-    salt: "",
+    factor: bcrypt_factor,
+    salt: bcrypt_salt,
+    passwordChangeRequired: false,  # Add this field like in Akamai example
     verified: user.confirmed?,
     active: user.confirmed?,
     registrations: [
@@ -36,29 +53,25 @@ users_data = User.all.map do |user|
         roles: ["user"]
       }
     ],
+    # Additional user data
     data: {
-      source_system: "rails_auth",
-      original_user_id: user.id,
-      locked_at: nil,
-      confirmation_token: nil,
-      last_sign_in_ip: user.last_sign_in_ip,
-      current_sign_in_ip: user.current_sign_in_ip
+      migrated_from: "rails_authentication",
+      original_id: user.id
     }
   }
-  
-  # Add factor if bcrypt cost is available
-  user_data[:factor] = bcrypt_cost if bcrypt_cost
   
   user_data
 end
 
-# Write to file with proper FusionAuth format
-export_data = { users: users_data }
-filename = "users_export_#{Time.current.strftime('%Y%m%d_%H%M%S')}.json"
-File.write(filename, JSON.pretty_generate(export_data))
+# Save to JSON file
+timestamp = Time.now.strftime("%Y%m%d_%H%M%S")
+filename = "users_export_#{timestamp}.json"
 
-puts ""
-puts "Export completed successfully!"
-puts "File saved as: #{filename}"
-puts "Total users exported: #{users_data.count}"
-puts "Confirmed users: #{users_data.count { |u| u[:verified] }}" 
+File.open(filename, 'w') do |file|
+  file.write(JSON.pretty_generate(users_data))
+end
+
+puts "\nExport complete!"
+puts "Saved #{users_data.length} users to #{filename}"
+puts "\nExample import command:"
+puts "./import.rb -k YOUR_API_KEY -t TENANT_ID -r APPLICATION_ID -u #{filename}" 

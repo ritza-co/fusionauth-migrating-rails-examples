@@ -13,18 +13,35 @@ puts "Found #{User.count} users to export"
 users_data = User.all.map do |user|
   puts "Exporting user: #{user.email}"
   
-  # Extract bcrypt cost factor for FusionAuth
-  bcrypt_cost = nil
-  if user.encrypted_password&.start_with?('$2a$')
-    bcrypt_cost = user.encrypted_password.split('$')[2].to_i
+  # Parse bcrypt hash according to FusionAuth requirements:
+  # Example: $2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy
+  # Should be split to:
+  # factor: 10
+  # salt: N9qo8uLOickgx2ZMRZoMye (first 22 chars after factor)
+  # password: IjZAgcfl7p92ldGxad68LJZdL17lhWy (remaining chars)
+  
+  bcrypt_factor = 10  # default
+  bcrypt_salt = ""
+  bcrypt_password = ""
+  
+  if user.encrypted_password&.match(/^\$2[aby]\$(\d+)\$(.+)$/)
+    bcrypt_factor = $1.to_i
+    salt_and_hash = $2
+    
+    # According to FusionAuth requirements, salt is first 22 characters
+    bcrypt_salt = salt_and_hash[0, 22]
+    # Password is the remaining characters
+    bcrypt_password = salt_and_hash[22..-1]
   end
   
   user_data = {
     email: user.email,
     username: user.email,
-    password: user.encrypted_password,
+    password: bcrypt_password,
     encryptionScheme: "bcrypt",
-    salt: "",
+    factor: bcrypt_factor,
+    salt: bcrypt_salt,
+    passwordChangeRequired: false,  # Add this field like in Akamai example
     verified: user.respond_to?(:confirmed?) ? user.confirmed? : true,
     active: true,
     registrations: [
@@ -44,9 +61,6 @@ users_data = User.all.map do |user|
       current_sign_in_ip: user.respond_to?(:current_sign_in_ip) ? user.current_sign_in_ip : nil
     }
   }
-  
-  # Add factor if bcrypt cost is available
-  user_data[:factor] = bcrypt_cost if bcrypt_cost
   
   user_data
 end
