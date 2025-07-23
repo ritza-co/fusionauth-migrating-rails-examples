@@ -11,7 +11,7 @@
     "test:rails-auth": "cd ruby-users-rails-auth && rails test",
     "export:devise": "cd ruby-users-devise && rails runner export_users_for_fusionauth.rb",
     "export:omniauth": "cd ruby-users-omniauth && rails runner export_users_for_fusionauth.rb",
-    "export:rails-auth": "cd ruby-users-rails-auth && rails runner scripts/export_users_for_fusionauth.rb",
+    "export:rails-auth": "cd ruby-users-rails-auth && rails runner export_users_for_fusionauth.rb",
     "setup:devise": "cd ruby-users-devise && bundle install && rails db:migrate && rails db:seed",
     "setup:omniauth": "cd ruby-users-omniauth && bundle install && rails db:migrate && rails db:seed",
     "setup:rails-auth": "cd ruby-users-rails-auth && bundle install && rails db:migrate && rails db:seed"

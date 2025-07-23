@@ -3,7 +3,7 @@
 # Simple User Export Script for Rails Authentication
 # Exports users as plain JSON
 
-require_relative '../config/environment'
+require_relative 'config/environment'
 require 'json'
 require 'securerandom'
 
@@ -48,7 +48,7 @@ users_data = User.all.map do |user|
     registrations: [
       {
         id: SecureRandom.uuid,
-        applicationId: "ae9e7a36-a8a7-44da-a340-34ebf08c2966",
+        applicationId: "e9fdb985-9173-4e01-9d73-ac2d60d1dc8e",
         verified: user.confirmed?,
         roles: ["user"]
       }
@@ -64,14 +64,16 @@ users_data = User.all.map do |user|
 end
 
 # Save to JSON file
-timestamp = Time.now.strftime("%Y%m%d_%H%M%S")
-filename = "users_export_#{timestamp}.json"
+filename = "users_export.json"
+
+export_data = {
+  users: users_data
+}
 
 File.open(filename, 'w') do |file|
-  file.write(JSON.pretty_generate(users_data))
+  file.write(JSON.pretty_generate(export_data))
 end
 
 puts "\nExport complete!"
 puts "Saved #{users_data.length} users to #{filename}"
-puts "\nExample import command:"
-puts "./import.rb -k YOUR_API_KEY -t TENANT_ID -r APPLICATION_ID -u #{filename}" 
+puts "Total users exported: #{users_data.count}" 

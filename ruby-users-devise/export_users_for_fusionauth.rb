@@ -47,7 +47,7 @@ users_data = User.all.map do |user|
     registrations: [
       {
         id: SecureRandom.uuid,
-        applicationId: "946a6b97-a9d1-4065-951a-0ef7dd5c281a",
+        applicationId: "e9fdb985-9173-4e01-9d73-ac2d60d1dc8e",
         verified: user.respond_to?(:confirmed?) ? user.confirmed? : true,
         roles: ["user"]
       }
@@ -67,7 +67,7 @@ end
 
 # Write to file with proper FusionAuth format
 export_data = { users: users_data }
-filename = "users_export_#{Time.current.strftime('%Y%m%d_%H%M%S')}.json"
+filename = "users_export.json"
 File.write(filename, JSON.pretty_generate(export_data))
 
 puts ""
