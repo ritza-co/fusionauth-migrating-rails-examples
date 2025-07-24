@@ -28,4 +28,7 @@ Rails.application.routes.draw do
   post  "password_reset",         to: "password_resets#create", as: :password_reset
   get   "password_reset/:token",  to: "password_resets#edit",   as: :edit_password_reset
   patch "password_reset/:token",  to: "password_resets#update", as: :update_password_reset
+  
+  # FusionAuth Connector
+  post "fusionauth/connector", to: "fusion_auth_connector#authenticate"
 end
