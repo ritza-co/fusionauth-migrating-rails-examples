@@ -28,7 +28,6 @@ users_data = User.all.map do |user|
     bcrypt_factor = $1.to_i
     salt_and_hash = $2
     
-    # According to FusionAuth requirements, salt is first 22 characters
     bcrypt_salt = salt_and_hash[0, 22]
     # Password is the remaining characters
     bcrypt_password = salt_and_hash[22..-1]
