@@ -41,7 +41,7 @@ users_data = User.all.map do |user|
     encryptionScheme: "bcrypt",
     factor: bcrypt_factor,
     salt: bcrypt_salt,
-    passwordChangeRequired: false,  # Add this field like in Akamai example
+    passwordChangeRequired: false,
     verified: user.confirmed?,
     active: user.confirmed?,
     registrations: [
