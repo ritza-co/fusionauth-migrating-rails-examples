@@ -25,6 +25,6 @@ Rails.application.routes.draw do
   # Home routes
   get "/dashboard", to: "home#index", as: :dashboard
   
-  # FusionAuth Connector
-  post "fusionauth/connector", to: "fusion_auth_connector#authenticate"
+  # # FusionAuth Connector
+  # post "fusionauth/connector", to: "fusion_auth_connector#authenticate"
 end
