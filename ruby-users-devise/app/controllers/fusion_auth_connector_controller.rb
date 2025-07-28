@@ -1,10 +1,7 @@
 class FusionAuthConnectorController < ApplicationController
   # Skip CSRF protection for API endpoint called by FusionAuth
   skip_before_action :verify_authenticity_token
-  
-  # Skip Devise authentication for this endpoint
-  skip_before_action :authenticate_user!, if: :devise_controller?
-  
+
   APPLICATION_ID = 'e9fdb985-9173-4e01-9d73-ac2d60d1dc8e'.freeze
   
   def authenticate
