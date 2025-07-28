@@ -43,7 +43,7 @@ class FusionAuthConnectorController < ApplicationController
     user_uuid = generate_consistent_uuid(user.id)
     
     {
-      # Required fields for FusionAuth
+      # Required fields for FusionAuth - match export script exactly
       id: user_uuid,
       email: user.email,
       username: user.email,
@@ -56,30 +56,25 @@ class FusionAuthConnectorController < ApplicationController
       fullName: extract_full_name(user),
       firstName: extract_first_name(user),
       lastName: extract_last_name(user),
-      verified: user.confirmed_at.present?,
-      active: user.confirmed_at.present?,
+      verified: user.respond_to?(:confirmed?) ? user.confirmed? : true,
+      active: true,
       
       # Application registration - associate user with the application
       registrations: [{
         id: SecureRandom.uuid,
         applicationId: APPLICATION_ID,
-        verified: user.confirmed_at.present?,
+        verified: user.respond_to?(:confirmed?) ? user.confirmed? : true,
         roles: ['user']
       }],
       
-      # Migration metadata stored in user data
+      # Migration metadata - match export script exactly
       data: {
-        migrated_from: 'devise_authentication',
-        original_id: user.id,
-        migrated_at: Time.current.iso8601,
-        sign_in_count: user.sign_in_count,
-        last_sign_in_at: user.last_sign_in_at&.iso8601,
-        current_sign_in_at: user.current_sign_in_at&.iso8601,
-        last_sign_in_ip: user.last_sign_in_ip,
-        current_sign_in_ip: user.current_sign_in_ip,
-        confirmed_at: user.confirmed_at&.iso8601,
-        created_at: user.created_at&.iso8601,
-        updated_at: user.updated_at&.iso8601
+        source_system: 'devise',
+        original_user_id: user.id,
+        locked_at: user.respond_to?(:locked_at) ? user.locked_at : nil,
+        confirmation_token: user.respond_to?(:confirmation_token) ? user.confirmation_token : nil,
+        last_sign_in_ip: user.respond_to?(:last_sign_in_ip) ? user.last_sign_in_ip : nil,
+        current_sign_in_ip: user.respond_to?(:current_sign_in_ip) ? user.current_sign_in_ip : nil
       }
     }
   end
