@@ -29,14 +29,12 @@ Once the application is running, you can access the FusionAuth instance at: <htt
 
 ## Devise Project
 
-The project is located at ruby-users-devise. It uses ruby on rails. devise for authentication and user management, based on email/password. There is an UI for login, signup and password change.
+The project is in the folder ruby-users-devise. It uses ruby on rails and devise for authentication and user management, based on email/password. There is a UI for login, signup and password change.
 
-### Export users
-
-You can export users in a json file running this command:
+### Setup
 
 ```bash
-npm run export:devise
+npm run setup:devise
 ```
 
 ### Starting the server
@@ -47,26 +45,24 @@ Use the following command to start the server at URL: <http://localhost:3000>
 npm run start:devise
 ```
 
-### Commands
+### Export users
+
+You can export users in a json file by running this command:
 
 ```bash
-# Setup
-npm run setup:devise
-
-# Run tests
-npm run test:devise
+npm run export:devise
 ```
+
 
 ## OmniAuth Project
 
-The project is located at ruby-users-omniauth. It uses ruby on rails. OmniAuth for authentication and user management, based on Google OAuth2 and developer fallback. There is an UI for social login and profile management.
+The project is in the folder ruby-users-omniauth. It uses ruby on rails and OmniAuth for authentication and user management, based on Google OAuth2 and developer fallback. There is a UI for social login and profile management.
 
-### Export users
 
-You can export users in a json file running this command:
+### Setup
 
 ```bash
-npm run export:omniauth
+npm run setup:omniauth
 ```
 
 ### Starting the server
@@ -77,26 +73,23 @@ Use the following command to start the server at URL: <http://localhost:3001>
 npm run start:omniauth
 ```
 
-### Commands
+### Export users
+
+You can export users in a json file by running this command:
 
 ```bash
-# Setup
-npm run setup:omniauth
-
-# Run tests
-npm run test:omniauth
+npm run export:omniauth
 ```
+
 
 ## Rails Auth Project
 
-The project is located at ruby-users-rails-auth. It uses ruby on rails. Rails 8.0 built-in authentication with has_secure_password for authentication and user management, based on email/password. There is an UI for login, signup, password reset and user tracking.
+The project is in the folder ruby-users-rails-auth. It uses ruby on rails and Rails 8.0 built-in authentication with `has_secure_password` for authentication and user management, based on email/password. There is a UI for login, signup, password reset and user tracking.
 
-### Export users
-
-You can export users in a json file running this command:
+### Setup
 
 ```bash
-npm run export:rails-auth
+npm run setup:rails-auth
 ```
 
 ### Starting the server
@@ -107,15 +100,14 @@ Use the following command to start the server at URL: <http://localhost:3002>
 npm run start:rails-auth
 ```
 
-### Commands
+### Export users
+
+You can export users in a json file by running this command:
 
 ```bash
-# Setup
-npm run setup:rails-auth
-
-# Run tests
-npm run test:rails-auth
+npm run export:rails-auth
 ```
+
 
 ## Test Accounts
 
