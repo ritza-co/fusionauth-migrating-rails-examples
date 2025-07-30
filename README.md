@@ -1,6 +1,6 @@
-# FusionAuth Migration Guide - Rails Authentication Examples
+# FusionAuth Rails Migration Examples
 
-This repository contains three Rails applications demonstrating different authentication approaches and how to export user data.
+Rails-based authentication migration examples for FusionAuth. Includes Devise, OmniAuth, and Rails built-in authentication.
 
 ## Prerequisites
 
@@ -11,43 +11,43 @@ This repository contains three Rails applications demonstrating different authen
 - SQLite3
 - Docker
 
-## Setup
+## Set Up
 
-Install npm dependencies to run the project commands:
+Install npm dependencies.
 
 ```bash
 npm install
 ```
 
-To import a user, you need to start the FusionAuth application. Use the following command:
+Start the FusionAuth application.
 
 ```bash
 docker compose up -d --build
 ```
 
-Once the application is running, you can access the FusionAuth instance at: <http://localhost:9011>
+Access the FusionAuth instance at <http://localhost:9011>.
 
 ## Devise Project
 
-The project is in the folder ruby-users-devise. It uses ruby on rails and devise for authentication and user management, based on email/password. There is a UI for login, signup and password change.
+The Devise project in the `ruby-users-devise` folder uses email-and-password authentication and includes a UI for login, signup, and password change.
 
-### Setup
+### Set Up
 
 ```bash
 npm run setup:devise
 ```
 
-### Starting the server
+### Start The Server
 
-Use the following command to start the server at URL: <http://localhost:3000>
+Start the server at <http://localhost:3000>.
 
 ```bash
 npm run start:devise
 ```
 
-### Export users
+### Export Users
 
-You can export users in a json file by running this command:
+Export users in a JSON file.
 
 ```bash
 npm run export:devise
@@ -56,53 +56,52 @@ npm run export:devise
 
 ## OmniAuth Project
 
-The project is in the folder ruby-users-omniauth. It uses ruby on rails and OmniAuth for authentication and user management, based on Google OAuth2 and developer fallback. There is a UI for social login and profile management.
+The OmniAuth project in the `ruby-users-omniauth` folder uses Google OAuth 2.0 with developer fallback, and includes a UI for social login and profile management.
 
-
-### Setup
+### Set Up
 
 ```bash
 npm run setup:omniauth
 ```
 
-### Starting the server
+### Start The Server
 
-Use the following command to start the server at URL: <http://localhost:3001>
+Start the server at <http://localhost:3001>.
 
 ```bash
 npm run start:omniauth
 ```
 
-### Export users
+### Export Users
 
-You can export users in a json file by running this command:
+Export users in a JSON file.
 
 ```bash
 npm run export:omniauth
 ```
 
 
-## Rails Auth Project
+## Rails Built-In Authentication Project
 
-The project is in the folder ruby-users-rails-auth. It uses ruby on rails and Rails 8.0 built-in authentication with `has_secure_password` for authentication and user management, based on email/password. There is a UI for login, signup, password reset and user tracking.
+The Rails built-in authentication project in the `ruby-users-rails-auth` folder uses email-and-password authentication with `has_secure_password, and includes a UI for login, signup, password reset, and user tracking.
 
-### Setup
+### Set Up
 
 ```bash
 npm run setup:rails-auth
 ```
 
-### Starting the server
+### Start The Server
 
-Use the following command to start the server at URL: <http://localhost:3002>
+Start the server at <http://localhost:3002>.
 
 ```bash
 npm run start:rails-auth
 ```
 
-### Export users
+### Export Users
 
-You can export users in a json file by running this command:
+Export users in a JSON file.
 
 ```bash
 npm run export:rails-auth
